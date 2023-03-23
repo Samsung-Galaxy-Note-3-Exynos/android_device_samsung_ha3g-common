@@ -1,0 +1,126 @@
+import /vendor/etc/init/hw/init.baseband.rc
+
+on boot
+
+    # Bluetooth Audio (AVRCP)
+    chown system system /sys/class/input/input12/enabled
+    chmod 0660 /sys/class/input/input12/enabled
+
+
+    # Headphones (Headset)
+    chown system system /sys/class/input/input11/enabled
+    chmod 0660 /sys/class/input/input11/enabled
+
+    # S-Pen (sec_e-pen)
+    chown system system /sys/class/input/input9/enabled
+    chmod 0660 /sys/class/input/input9/enabled
+
+    # Physical Home Button (gpio-keys)
+    chown system system /sys/class/input/input8/enabled
+    chmod 0660 /sys/class/input/input8/enabled
+
+    # Light Sensor
+    chown system system /sys/class/input/input7/enabled
+    chmod 0660 /sys/class/input/input7/enabled
+
+    # Magnetic Sensor
+    chown system system /sys/class/input/input6/enabled
+    chmod 0660 /sys/class/input/input6/enabled
+
+    # Gyro Sensor
+    chown system system /sys/class/input/input5/enabled
+    chmod 0660 /sys/class/input/input5/enabled
+
+    # Accelerometer sensor
+    chown system system /sys/class/input/input4/enabled
+    chmod 0660 /sys/class/input/input4/enabled
+    chown system radio /sys/class/sensors/accelerometer_sensor/selftest
+
+    # MHL (sii8240_rcp)
+    chown system system /sys/class/input/input3/enabled
+    chmod 0660 /sys/class/input/input3/enabled
+
+    # Touchscreen (sec_touchscreen)
+    chown system system /sys/class/input/input2/enabled
+    chmod 0660 /sys/class/input/input2/enabled
+
+    # Micro-USB IC (max77803-muic)
+    chown system system /sys/class/input/input0/enabled
+    chmod 0660 /sys/class/input/input0/enabled
+
+    # Temphumidity_sensor
+    chown system radio /sys/class/sensors/temphumidity_sensor/mcu_batt_adc
+    chown system radio /sys/class/sensors/temphumidity_sensor/mcu_chg_adc
+    chown system radio /sys/class/sensors/temphumidity_sensor/batt_temperature
+    chown system radio /sys/class/sensors/temphumidity_sensor/chg_temperature
+
+    # Permissions for EPEN
+    chown system radio /sys/class/sec/sec_epen/epen_firm_update
+    chown system radio /sys/class/sec/sec_epen/epen_rotation
+    chown system radio /sys/class/sec/sec_epen/epen_hand
+    chown system radio /sys/class/sec/sec_epen/epen_reset
+    chown system radio /sys/class/sec/sec_epen/epen_reset_result
+    chown system radio /sys/class/sec/sec_epen/epen_checksum
+    chown system radio /sys/class/sec/sec_epen/epen_checksum_result
+    chown system radio /sys/class/sec/sec_epen/epen_saving_mode
+    chown system radio /sys/class/sec/sec_epen/boost_level
+
+    # Wolfson DAC Settings
+    write /sys/class/misc/wolfson_control/switch_eq_speaker  1 # Toggle EQ
+    write /sys/class/misc/wolfson_control/speaker_gain_left 5 # Set Left Speaker Gain
+    write /sys/class/misc/wolfson_control/speaker_gain_right 5 # Set Right Speaker Gain
+    write /sys/class/misc/wolfson_control/eq_sp_gain_1 4 # Low Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_2 4 # Low-Mid Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_3 4 # Mid Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_4 5 # Mid-High Band
+    write /sys/class/misc/wolfson_control/eq_sp_gain_5 4 # High Band
+
+
+
+
+on post-fs-data
+
+  # YAAS(Yamaha Android Audio System) uses.
+    mkdir /data/ymc 0775 system system
+    chmod 0666 /dev/snd/controlC0
+
+  # SVC LED
+  
+    chown system system /sys/class/sec/led/led_r
+    chown system system /sys/class/sec/led/led_g
+    chown system system /sys/class/sec/led/led_b
+
+    chown system system /sys/class/leds/led_r/brightness
+    chown system system /sys/class/leds/led_g/brightness
+    chown system system /sys/class/leds/led_b/brightness
+    chown system system /sys/class/leds/led_r/delay_on
+    chown system system /sys/class/leds/led_g/delay_on
+    chown system system /sys/class/leds/led_b/delay_on
+    chown system system /sys/class/leds/led_r/delay_off
+    chown system system /sys/class/leds/led_g/delay_off
+    chown system system /sys/class/leds/led_b/delay_off
+    chown system system /sys/class/leds/led_r/blink
+    chown system system /sys/class/leds/led_g/blink
+    chown system system /sys/class/leds/led_b/blink
+
+    chown system system /sys/class/sec/led/led_pattern
+    chown system system /sys/class/sec/led/led_blink
+    chown system system /sys/class/sec/led/led_br_lev
+    chown system system /sys/class/sec/led/led_lowpower 
+    
+   # Epen power saving mode
+    write /sys/devices/virtual/sec/sec_epen/epen_saving_mode 1  
+     
+on fs
+
+# Permission for flashlight control 
+  chmod 0660 /sys/class/camera/flash/front_torch_flash
+  chown cameraserver system /sys/class/camera/flash/front_torch_flash
+          
+ # Permissions Camera
+   chown system radio /sys/class/camera/flash/front_flash
+   
+  # Broadcom NFC
+      chmod 0600 /dev/bcm2079x
+      chown nfc nfc /dev/bcm2079x 
+                       
