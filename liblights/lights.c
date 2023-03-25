@@ -207,13 +207,8 @@ static int set_light_leds(const struct light_state_t *state, int type)
 
     switch (state->flashMode) {
     case LIGHT_FLASH_NONE:
-            // use battery led state stored
-            if (g_BatteryStore.blink == NULL) {
-                led.red = 0;
-                led.green = 0;
-                led.blue = 0;
-                snprintf(g_BatteryStore.blink, MAX_WRITE_CMD, "0x000000 0 0");
-            }
+	
+	
             led = g_BatteryStore;
         break;
     case LIGHT_FLASH_TIMED:
