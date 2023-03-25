@@ -28,8 +28,8 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 # Display
 TARGET_SCREEN_DENSITY := 480
 
-# Audio
-BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
+#Additional Sepolicy (Camera and YMU831 Chip Required)
+BOARD_SEPOLICY_DIRS += device/samsung/ha3g-common/sepolicy
 
 # Camera: portrait orientation
 BOARD_CAMERA_FRONT_ROTATION := 270
