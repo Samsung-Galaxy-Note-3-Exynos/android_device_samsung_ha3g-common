@@ -53,6 +53,9 @@ BACKLIGHT_PATH := "/sys/class/backlight/panel/brightness"
 # Audio blobs
 TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
+#Yamaha Audio-Hal
+TARGET_AUDIOHAL_VARIANT := yamaha
+
 # Shims
 TARGET_LD_SHIM_LIBS += \
     /vendor/bin/gpsd|/vendor/lib/libshim_dmitry_gps.so \
