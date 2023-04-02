@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifneq ($(TARGET_DEVICE),ha3g)
+ifeq ($(TARGET_AUDIOHAL_VARIANT),yamaha)
 
 LOCAL_PATH := $(call my-dir)
 
